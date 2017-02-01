@@ -1,14 +1,18 @@
+var game = {};
 requirejs.config({
       baseUrl: "js",
-      paths: {
-          Phaser: 'phaser'
-      }
 }); 
 
-require(['Phaser'], function( Phaser ){  
-    alert("Hallo");
-    var game = new Phaser.Game(600, 400, Phaser.AUTO, 'gameSpace', '');  
-   /* game.state.add('Preload', Preload); 
+require(['Phaser', 'Preload', 'StartScreen', 'Level1'], function(Phaser){  
+
+    game = new Phaser.Game(600, 400, Phaser.AUTO, 'gameSpace', '');  
+    game.state.add('Preload', Preload);
+    game.state.add('StartScreen', StartScreen);
+    game.state.add('Level1', Level1);
+    
+    game.state.start('Preload');
+    
+    /*game.state.add('Preload', Preload); 
     game.state.add('Startscreen', Startscreen);
     game.state.add('Level1', Level1);
     game.state.add('Level2', Level2);
