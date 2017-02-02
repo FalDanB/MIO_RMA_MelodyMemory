@@ -12,8 +12,14 @@ Preload.prototype =  {
         
         //Preload Images
         game.load.image('startScreen', './resources/startscreen.jpg'); 
+        game.load.image('instructions', './resources/instructions.jpg');
         game.load.image('background', './resources/lawn.jpg');
-        game.load.image('playButton', './resources/playbutton.png' )
+        game.load.image('playButton', './resources/playbutton.png');
+        game.load.image('instructionsButton', './resources/instructionsbutton.png');
+        game.load.image('level1Button', './resources/level1button.png');
+        game.load.image('level2Button', './resources/level2button.png');
+        game.load.image('level3Button', './resources/level3button.png');
+        game.load.image('backButton', './resources/backbutton.png');
         console.log("...images preloaded");
        
         //Preload Sprite Sheets

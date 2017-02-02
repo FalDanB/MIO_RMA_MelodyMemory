@@ -3,12 +3,13 @@ requirejs.config({
       baseUrl: "js",
 }); 
 
-require(['Phaser', 'Preload', 'StartScreen', 'Level1'], function(Phaser){  
+require(['Phaser', 'Preload', 'StartScreen', 'Instructions', 'GameBase'], function(Phaser){  
 
     game = new Phaser.Game(600, 400, Phaser.AUTO, 'gameSpace', '');  
     game.state.add('Preload', Preload);
     game.state.add('StartScreen', StartScreen);
-    game.state.add('Level1', Level1);
+    game.state.add('Instructions', Instructions);
+    game.state.add('GameBase', GameBase);
     
     game.state.start('Preload');
     

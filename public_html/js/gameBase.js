@@ -1,12 +1,12 @@
-define("Level1", ['Phaser', 'GameSetup', 'GamePlay'],  function( Phaser, GameSetup, GamePlay) { 
+define("GameBase", ['Phaser', 'GameSetup', 'GamePlay'],  function( Phaser, GameSetup, GamePlay) { 
    
-Level1 = function (game) {
+GameBase = function (game) {
     var levelData;
     
    // level1Setup, solved, audioPlay, solvedPairs, fieldChange, tempField;
 }
 
-Level1.prototype =  {
+GameBase.prototype =  {
     
     create: function() {
         levelData = GameSetup.setUpLevel(1);
