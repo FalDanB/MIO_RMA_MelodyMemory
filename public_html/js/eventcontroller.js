@@ -1,8 +1,9 @@
 define ('EventController', ['Phaser'], function(Phaser) {
-   
     var lastField;
     var audioPlaying = 0;
-   
+    var activeField = 0;
+    var steppedFields = [];
+    var counter = 0;
    /** Function to check if opponent has caught player
     * 
     * @param {PlayerChar} player
@@ -32,22 +33,23 @@ define ('EventController', ['Phaser'], function(Phaser) {
     function checkFieldActivation (player, opponent, fields) {
        //Variable to be returned with 1 if a pair has been solved
        var solved = 0
-       
+
        //Set Player's and Opponent's X and Y Coordinates (not whole image should be used)
        var playerX = player.sprite.body.x + 0.5* player.sprite.body.width;
        var playerY = player.sprite.body.y + player.sprite.body.height;
        var opponentX = opponent.sprite.body.x + 0.5* opponent.sprite.body.width;
        var opponentY = opponent.sprite.body.y + opponent.sprite.body.height;
        
-       //active field can be last field if exists, else new 
+       
+       //Always highlight last field in green
        if (lastField != undefined) {
-            var activeField = lastField;}
-       else {
-           var activeField = 0;
+           lastField.frame = 1;
        }
        
-       //check if player or opponent steps on unsolved field, if yes set to active field
-        for (var i = 0; i<fields.list.length; i++) {
+       // Create variable for activeField which is 0 to begin with
+
+       //Check if stepped on field on put stepped on fields into an array (player and opponent)
+       for (var i = 0; i<fields.list.length; i++) {
           if (
               playerX > fields.list[i].x &&
               playerX < (fields.list[i].x + fields.list[i].width) &&
@@ -61,25 +63,64 @@ define ('EventController', ['Phaser'], function(Phaser) {
               opponentY < (fields.list[i].y + fields.list[i].height) &&
               fields.list[i].solved == false
             ) {
-              activeField = fields.list[i]; 
-              
-              if (activeField.audio != undefined && !audioPlaying.isPlaying) {
-                audioPlaying = game.sound.play(activeField.audio);
-              }            
-            solved = checkSolved(activeField);
-            lastField = activeField;
+              steppedFields.push(fields.list[i]);
+              //set the stepped on counter for the field for comparison if empty
+              if (fields.list[i].steppedOn == undefined) {
+                  fields.list[i].steppedOn = counter;
+              }
+            } else {
+              //clear the stepped on counter for field if not active
+              if (fields.list[i].steppedOn != undefined) {
+                  fields.list[i].steppedOn = undefined;
+              }
+            }
           }
+       
+       //Get the field that was stepped on later
+       if (steppedFields.length == 1) {
+           activeField = steppedFields[0];
+       } else if (steppedFields.length == 2) {
+           for (var i=0; i<steppedFields.length; i++) {
+               if (steppedFields[i].steppedOn == Math.max(steppedFields[0].steppedOn, steppedFields[1].steppedOn)) {
+                   console.log("Winner: " + steppedFields[i].pair + " " + steppedFields[i].steppedOn);
+                   activeField = steppedFields[i];
+               } 
+           }
        }
        
-       //Set all inactive Fields to frame 0 and last field to frame 1
-       for (var j=0; j<fields.list.length; j++) {
-            if (!fields.list[j].solved && !fields.list[j] != lastField) {
-                fields.list[j].frame = 0;
+       //Switch to new audio if new field activated
+       if (lastField!= undefined && lastField!=activeField && audioPlaying != 0) {
+           audioPlaying.stop();
+           audioPlaying = game.sound.play(activeField.audio);
+       }
+       //Start Audio if field activate and audio not already playing
+       if (activeField.audio != undefined && !audioPlaying.isPlaying) {
+           audioPlaying = game.sound.play(activeField.audio);
+       }    
+       
+       //Check if pair was solved
+       solved = checkSolved(activeField);
+       
+       //copy activeField to lastField
+       lastField = activeField;
+       
+       //Show all non-active fields as inactive abd lastField as active
+       for (var i=0; i<fields.list.length; i++) {
+            if (!fields.list[i].solved && !fields.list[i] != lastField) {
+                fields.list[i].frame = 0;
             }
         }
         if (lastField!= undefined) lastField.frame = 1;
-        
-        return solved;
+       
+       //Increase game counter 
+       counter++;
+       
+       //Empty stepped fields array
+       steppedFields = [];
+       
+       //retun 1 if a pair was solved, else 0
+       return solved;
+     
     }
     
     /** Function to check if a pair of fields has been solved, destroys solved fields
@@ -88,8 +129,11 @@ define ('EventController', ['Phaser'], function(Phaser) {
      */
     checkSolved = function (field) {
         var solved = 0;
+        //Safetey check if field is not already solved
         if (field.solved === false) { 
+            //only applicable if last field exists
             if (lastField != undefined) {   
+                //check if current field pair value is 0.5 higher than last field pair value, also rounded down both values should be equal (e.g. 2 and 2.5)
                 if (field.pair === lastField.pair+0.5 && Math.floor(field.pair) === Math.floor(lastField.pair)) {
                     solved = 1;
                     lastField.solved = true;
@@ -102,7 +146,7 @@ define ('EventController', ['Phaser'], function(Phaser) {
         return solved;
     }
     
-    
+    //return public functions
     return {
         checkOpponentCatching: checkOpponentCatching, 
         checkFieldActivation: checkFieldActivation
