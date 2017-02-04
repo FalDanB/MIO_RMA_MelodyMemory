@@ -90,7 +90,6 @@ define ('EventController', ['Phaser'], function(Phaser) {
        } else if (steppedFields.length == 2) {
            for (var i=0; i<steppedFields.length; i++) {
                if (steppedFields[i].steppedOn == Math.max(steppedFields[0].steppedOn, steppedFields[1].steppedOn)) {
-                   console.log("Winner: " + steppedFields[i].pair + " " + steppedFields[i].steppedOn);
                    activeField = steppedFields[i];
                } 
            }

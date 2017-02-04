@@ -15,6 +15,8 @@ Preload.prototype =  {
         game.load.image('instructions', './resources/instructions.jpg');
         game.load.image('background', './resources/lawn.jpg');
         game.load.image('interlevel', './resources/interlevel.jpg');
+        game.load.image('caught', './resources/caught.jpg');
+        game.load.image('gameEnd', './resources/congratulations.jpg');
         game.load.image('playButton', './resources/playbutton.png');
         game.load.image('instructionsButton', './resources/instructionsbutton.png');
         game.load.image('level1Button', './resources/level1button.png');
@@ -22,6 +24,8 @@ Preload.prototype =  {
         game.load.image('level3Button', './resources/level3button.png');
         game.load.image('backButton', './resources/backbutton.png');
         game.load.image('nextLevelButton', './resources/nextLevelButton.png');
+        game.load.image('restartLevelButton', './resources/restartLevelButton.png');
+        game.load.image('playAgainButton', './resources/playAgainButton.png');
         console.log("...images preloaded");
        
         //Preload Sprite Sheets
@@ -64,7 +68,7 @@ Preload.prototype =  {
         game.finalAudio[1] = 'grieg3';
         game.load.audio('grieg3', './resources/grieg3.mp3');       
         game.finalAudio[2] = 'handel3';
-        game.load.audio('tchaikovsky3', './resources/tchaikovsky3.mp3'); 
+        game.load.audio('handel3', './resources/handel3.mp3'); 
         game.finalAudio[3] = 'tchaikovsky3';
         game.load.audio('tchaikovsky3', './resources/tchaikovsky3.mp3'); 
         game.finalAudio[4] = 'vivaldi3';

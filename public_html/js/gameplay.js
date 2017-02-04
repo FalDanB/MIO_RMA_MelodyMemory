@@ -3,6 +3,7 @@ define('GamePlay', ['Phaser', 'MoveController', 'EventController'], function (Ph
     
     function reset() {
         EventController.resetLastField();
+        solvedPairs = 0;
     }
     
     function playGameStep(levelData) {
@@ -12,7 +13,7 @@ define('GamePlay', ['Phaser', 'MoveController', 'EventController'], function (Ph
     
         //Check if opponent caught player
         if (EventController.checkOpponentCatching(levelData['player'], levelData['opponent'])) {
-            console.log("caught!")
+            game.state.start("Caught");
         }
         
         //Check For Field Activation and add to solved pairs tally if solved
@@ -28,7 +29,11 @@ define('GamePlay', ['Phaser', 'MoveController', 'EventController'], function (Ph
     function doFinalStep() {
         EventController.playFinalAudio();
         solvedPairs = 0;
-        game.state.start("Interlevel");
+        if (game.level <=2 ) {
+            game.state.start("Interlevel");
+        } else if (game.level == 3) {
+            game.state.start("GameEnd");
+        }
     }
     
     return {
