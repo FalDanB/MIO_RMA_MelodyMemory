@@ -1,4 +1,4 @@
-define('GameSetup', ['Phaser', 'Fields', 'PlayerChar'], function(Phaser, Fields, PlayerChar) {
+define('GameSetup', ['Phaser', 'Fields', 'Character'], function(Phaser, Fields, Character) {
    
    function setUpLevel(level) {
         console.log("...entering GameSetup!")
@@ -19,10 +19,10 @@ define('GameSetup', ['Phaser', 'Fields', 'PlayerChar'], function(Phaser, Fields,
         levelData['fields'] = fields;
         console.log("...field set-up complete, set solved pairs to 0")
         
-        whitey = new PlayerChar(game, 280,30,'whitey', 'player');
-        blacky = new PlayerChar (game, 280, 350, 'blacky', 'opponent');   
+        whitey = new Character(game, 280,30,'whitey', 'player');
+        mrgrey = new Character(game, 280, 350, 'mrgrey', 'opponent');   
         levelData['player'] = whitey;
-        levelData['opponent'] = blacky;
+        levelData['opponent'] = mrgrey;
         console.log("...set player and NPC sprites and added them to gameData"); 
         
         return levelData;

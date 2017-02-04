@@ -12,7 +12,7 @@ define('Fields', ['Phaser'], function() {
             } else if (i>=4 && i <8) {
                 this.list[i] = game.add.sprite(setup.TilesPos.x[i-3], setup.TilesPos.y[2], 'field');
             } else if (i>=8) {
-                this.list[i] = game.add.sprite(setup.TilesPos.Row3.x[i-7], setup.TilesPos.y[3], 'field');
+                this.list[i] = game.add.sprite(setup.TilesPos.x[i-7], setup.TilesPos.y[3], 'field');
             }
         }
         console.log("...fields created");

@@ -1,4 +1,4 @@
-define('PlayerChar', ['Phaser'], function(){
+define('Character', ['Phaser'], function(){
     
     function PlayerChar(game, xPos, yPos, name, type) {
             this.name = name;

@@ -1,22 +1,30 @@
 define("GameBase", ['Phaser', 'GameSetup', 'GamePlay'],  function( Phaser, GameSetup, GamePlay) { 
-   
+
+
 GameBase = function (game) {
-    var levelData;
-    
+    var levelData;  
+   /* if (game.finalAudio != undefined) {
+        if (game.finalAudio.isPlaying) {
+        game.finalAudio.stop();
+    }}*/
    // level1Setup, solved, audioPlay, solvedPairs, fieldChange, tempField;
 }
 
 GameBase.prototype =  {
     
     create: function() {
-        levelData = GameSetup.setUpLevel(1);
+        game.sound.stopAll();
+        levelData = GameSetup.setUpLevel(game.level);
+        GamePlay.reset();
     },
     
     update: function() {
-        var levelSolved = GamePlay.playGameStep(levelData);
+
+       var fielsCleared = GamePlay.playGameStep(levelData);
+
         
-        if (levelSolved == true) {
-            console.log("SOLVED!!!");
+        if (fielsCleared == true) {
+            GamePlay.doFinalStep();
         }
     }
 

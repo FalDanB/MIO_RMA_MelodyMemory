@@ -16,13 +16,13 @@ StartScreen.prototype =  {
         level2Button = this.game.add.button(300,349,"level2Button",this.startLevel2,this);
         level3Button = this.game.add.button(400,349,"level3Button",this.startLevel3,this);
         console.log("...added start screen image play and level button");
-        whitey =  game.add.sprite(20,60, 'whitey');
+        whitey = game.add.sprite(20,60, 'whitey');
         whitey.animations.add('right', [11,12], 10, true);
         whitey.animations.play('right');
         
-        blacky =  game.add.sprite(540,200, 'blacky');
-        blacky.animations.add('left', [9,10], 10, true);
-        blacky.animations.play('left');
+        mrgrey = game.add.sprite(540,200, 'mrgrey');
+        mrgrey.animations.add('left', [9,10], 10, true);
+        mrgrey.animations.play('left');
         
     },
     

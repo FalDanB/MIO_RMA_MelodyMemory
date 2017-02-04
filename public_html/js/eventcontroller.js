@@ -1,10 +1,18 @@
 define ('EventController', ['Phaser'], function(Phaser) {
     var lastField;
     var audioPlaying = 0;
+    var finalAudio = 0;
     var activeField = 0;
     var steppedFields = [];
     var counter = 0;
-   /** Function to check if opponent has caught player
+    
+   function resetLastField() {
+       lastField = 0;
+           activeField = 0;
+       console.log("lastField set to 0");
+   }
+    
+    /** Function to check if opponent has caught player
     * 
     * @param {PlayerChar} player
     * @param {PlayerChar} opponent
@@ -40,7 +48,7 @@ define ('EventController', ['Phaser'], function(Phaser) {
        var opponentX = opponent.sprite.body.x + 0.5* opponent.sprite.body.width;
        var opponentY = opponent.sprite.body.y + opponent.sprite.body.height;
        
-       
+       if (lastField!= 0) console.log(lastField.pair);
        //Always highlight last field in green
        if (lastField != undefined) {
            lastField.frame = 1;
@@ -94,7 +102,7 @@ define ('EventController', ['Phaser'], function(Phaser) {
            audioPlaying = game.sound.play(activeField.audio);
        }
        //Start Audio if field activate and audio not already playing
-       if (activeField.audio != undefined && !audioPlaying.isPlaying) {
+       if (activeField.audio != undefined && !audioPlaying.isPlaying && steppedFields.length > 0) {
            audioPlaying = game.sound.play(activeField.audio);
        }    
        
@@ -127,7 +135,7 @@ define ('EventController', ['Phaser'], function(Phaser) {
      * 
      * @param {Field} field
      */
-    checkSolved = function (field) {
+    function checkSolved (field) {
         var solved = 0;
         //Safetey check if field is not already solved
         if (field.solved === false) { 
@@ -146,9 +154,19 @@ define ('EventController', ['Phaser'], function(Phaser) {
         return solved;
     }
     
+    function playFinalAudio (field) {
+         audioPlaying.onStop.add(function() {
+             if (!finalAudio.isPlaying) { 
+                 game.finalAudio = game.sound.play(game.finalAudio[Math.floor(activeField.number/2)]);   
+             }
+     }, 1);
+    }
+    
     //return public functions
     return {
+        resetLastField : resetLastField,
         checkOpponentCatching: checkOpponentCatching, 
-        checkFieldActivation: checkFieldActivation
+        checkFieldActivation: checkFieldActivation,
+        playFinalAudio: playFinalAudio
     }
 });

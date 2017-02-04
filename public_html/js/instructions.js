@@ -12,14 +12,14 @@ Instructions.prototype =  {
         instructionsScreen = game.add.sprite(0,0,"instructions");
         backutton = this.game.add.button(160,360,"backButton",this.backToMainScreen,this);
         playButton = this.game.add.button(300,360,"playButton",this.startGame,this);
-        console.log("...added start instructions image, back and play button");
+        console.log("...added instructions image, back and play button");
         whitey =  game.add.sprite(40,100, 'whitey');
         whitey.animations.add('right', [11,12], 10, true);
         whitey.animations.play('right');
         
-        blacky =  game.add.sprite(40,160, 'blacky');
-        blacky.animations.add('up', [5,6,7,8], 10, true);
-        blacky.animations.play('up');
+        mrgrey =  game.add.sprite(40,160, 'mrgrey');
+        mrgrey.animations.add('up', [5,6,7,8], 10, true);
+        mrgrey.animations.play('up');
         
     },
     
