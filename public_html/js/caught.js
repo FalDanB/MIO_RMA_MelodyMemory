@@ -1,3 +1,7 @@
+/**Game State that is entered when player is caught by opponen
+ * @author Daniel Falkenstein - 797852
+ * @param {type} Phaser
+ */
 
 define("Caught", ['Phaser'],  function( Phaser ) { 
    
@@ -7,16 +11,20 @@ Caught = function (game) {
 
 Caught.prototype =  {
     
+    /** Create the Screen shown when caught by opponent
+     */
     create: function () {
         console.log("Caught State: Create");
         game.add.sprite(0,0,"caught");
-        this.game.add.button(300,360,"restartLevelButton",this.restartLevel,this);
+        this.game.add.button(200,320,"restartLevelButton",this.restartLevel,this);
         console.log("...added caught screen and restart level button");
         
     },
     
+    /** Restarts the level when button is clicked
+     */
     restartLevel: function () {
-        console.log("GameEnd: restart level button clicked");
+        console.log("Caught screen: restart level button clicked");
         console.log(">>> switching to Game Base State");
         this.game.state.start('GameBase');
     },

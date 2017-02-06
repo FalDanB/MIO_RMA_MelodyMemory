@@ -1,16 +1,34 @@
+/** Handles the game play of a Melody Memory Game
+ * 
+ * @author DanieL Falkenstein
+ * @param {Phaser} Phaser
+ * @param {js} MoveController
+ * @param {js} EventController}
+ */
+
 define('GamePlay', ['Phaser', 'MoveController', 'EventController'], function (Phaser, MoveController, EventController) {
+    //Holds the number of solved pairs at each level
     var solvedPairs = 0;
     
+    /**Resets the Game at beginning of each level
+     *  
+     */
     function reset() {
-        EventController.resetLastField();
+        EventController.resetFields();
         solvedPairs = 0;
     }
     
+    /** One Game Step as called by Game Base update function
+     * 
+     * @param {JSON} levelData
+     * @returns {Boolean} true if all pairs are solvede
+     */
     function playGameStep(levelData) {
+        
         //Move Player and Opponent
         MoveController.movePlayer(levelData['player']);
-        MoveController.moveOpponent(levelData['opponent'], levelData['player'], levelData['setup'].NPCspeed);
-    
+        MoveController.moveCharacter(levelData['opponent'], levelData['player'], levelData['setup'].NPCspeed);
+        
         //Check if opponent caught player
         if (EventController.checkOpponentCatching(levelData['player'], levelData['opponent'])) {
             game.state.start("Caught");
@@ -19,6 +37,7 @@ define('GamePlay', ['Phaser', 'MoveController', 'EventController'], function (Ph
         //Check For Field Activation and add to solved pairs tally if solved
         solvedPairs += EventController.checkFieldActivation(levelData['player'], levelData['opponent'], levelData['fields']); 
         
+        //Return true if level solved, else false
         if (solvedPairs == levelData['setup'].NoTiles/2) {
             return true;
         } else {
@@ -26,16 +45,17 @@ define('GamePlay', ['Phaser', 'MoveController', 'EventController'], function (Ph
         }
     }
    
+   /**Stops the players and calls event controller to play final audio and move on to next level
+    * 
+    * @returns {undefined}
+    */
     function doFinalStep() {
-        EventController.playFinalAudio();
-        solvedPairs = 0;
-        if (game.level <=2 ) {
-            game.state.start("Interlevel");
-        } else if (game.level == 3) {
-            game.state.start("GameEnd");
-        }
+        MoveController.stopPlayer(levelData['player']);
+        MoveController.stopPlayer(levelData['opponent']);
+        EventController.moveToNextLevel();
     }
     
+    //Return public functions
     return {
         reset: reset,
         playGameStep : playGameStep,

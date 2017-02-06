@@ -1,18 +1,37 @@
-
+/** Instructions Game State for Melody Memory Game
+ * 
+ * @authoer Daniel Falkenstein - 797852
+ * @param {Phaser} Phaser
+ * 
+ */
 define("Instructions", ['Phaser'],  function( Phaser ) { 
-   
+
+
+/** Main Instructions function for Phaser States
+ * 
+ * @param {Phaser Game} game
+ * 
+ */
 Instructions = function (game) {
-    
 }
 
 Instructions.prototype =  {
-    
+   
+    /** Sets up the instruction screen with background, sprites and buttons
+     * 
+     */
     create: function () {
         console.log("Instruction State: Create");
+        
+        //Set background
         instructionsScreen = game.add.sprite(0,0,"instructions");
+        
+        //Set buttons
         backutton = this.game.add.button(160,360,"backButton",this.backToMainScreen,this);
         playButton = this.game.add.button(300,360,"playButton",this.startGame,this);
         console.log("...added instructions image, back and play button");
+        
+        //Set sprites
         whitey =  game.add.sprite(40,100, 'whitey');
         whitey.animations.add('right', [11,12], 10, true);
         whitey.animations.play('right');
@@ -23,6 +42,9 @@ Instructions.prototype =  {
         
     },
     
+    /** Function to start the game (GameBase state) when button is clicked
+     *
+     */
     startGame: function () {
         console.log("Instruction: play button button clicked");
         game.level = 1;
@@ -34,6 +56,11 @@ Instructions.prototype =  {
         this.game.state.start('GameBase');
     },
     
+    
+    /** Function to go back to the main screen state if button is clicked
+     * 
+     * @returns {undefined}
+     */
     backToMainScreen: function () {
         console.log("Instructions: back button clicked");
         game.level = 1;

@@ -2,14 +2,30 @@ body {
     background-color: #000;
 }
 
+img {
+    border: 0;
+    padding: 0px;
+    margin: 0px;
+}
+
 #container {
-    width: 100%;
+    width: 804px;
+    margin-left: auto ;
+    margin-right: auto ;
+    margin-top: 50px;
+}
+
+#Frame {
+    position:absolute;
+        -webkit-box-shadow: -1px 14px 43px 0px rgba(100,100,100,100.25);
+-moz-box-shadow: -1px 14px 43px 0px rgba(100,100,100,100.25);
+box-shadow: -1px 14px 43px 0px rgba(100,100,100,100.25);
 }
 
 #gameSpace {
-  display: block;
   width: 600px ;
-  margin-left: auto ;
-  margin-right: auto ;
+  position: relative;
+  padding-top: 100px;
+  padding-left: 101px;
     
 }

@@ -1,12 +1,27 @@
+/** Handles the game play of a Melody Memory Game
+ * 
+ * @author Daniel Falkenstein
+ * @param {Phaser} Phaser
+ * @param {Fields} Fields
+ * @param {Character} Character
+ */
 define('GameSetup', ['Phaser', 'Fields', 'Character'], function(Phaser, Fields, Character) {
    
+   /** Funtion to set up the level with background, characters and fields
+    * Returns an array of JSON level setup data, player, opponent and fields
+    * 
+    * @param {int} level
+    * @returns 
+    */
    function setUpLevel(level) {
         console.log("...entering GameSetup!")
         var levelData = [];
-                        
+        
+        //Add Backgroud image
         background = game.add.sprite(0,0,"background");    
         console.log("...set background image");
 
+        //Get Level setup Data
         levelJSON = game.cache.getJSON('levels');
         if (level == 1) setupData = levelJSON.level1;
         else if (level == 2) setupData = levelJSON.level2;
@@ -15,10 +30,12 @@ define('GameSetup', ['Phaser', 'Fields', 'Character'], function(Phaser, Fields, 
         levelData['setup'] = setupData;
         console.log("...got Level Setup from JSON for level " + level);
         
+        //Set up fields
         fields = new Fields(game, setupData, game.fieldsAudio);
         levelData['fields'] = fields;
         console.log("...field set-up complete, set solved pairs to 0")
         
+        //Set up characters
         whitey = new Character(game, 280,30,'whitey', 'player');
         mrgrey = new Character(game, 280, 350, 'mrgrey', 'opponent');   
         levelData['player'] = whitey;

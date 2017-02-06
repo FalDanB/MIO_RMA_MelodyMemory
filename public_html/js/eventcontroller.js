@@ -1,15 +1,22 @@
+/** Handles the events that occur during a game of Melody Memory
+ * 
+ * @author Daniel Falkenstein - 797852
+ */
+
 define ('EventController', ['Phaser'], function(Phaser) {
-    var lastField;
     var audioPlaying = 0;
     var finalAudio = 0;
     var activeField = 0;
     var steppedFields = [];
     var counter = 0;
-    
-   function resetLastField() {
+   
+   /** Rests the lastField and activeField Objects and replaces it with 0
+    *
+    */
+   function resetFields() {
        lastField = 0;
-           activeField = 0;
-       console.log("lastField set to 0");
+       activeField = 0;
+       console.log("... fields set to 0");
    }
     
     /** Function to check if opponent has caught player
@@ -21,9 +28,11 @@ define ('EventController', ['Phaser'], function(Phaser) {
    function checkOpponentCatching (player, opponent) {
        var caught = false;
        
+       //get the difference of player's and opponent's x and y coordinates
        var diffX = Math.abs(player.sprite.body.x - opponent.sprite.body.x);
        var diffY = Math.abs(player.sprite.body.y - opponent.sprite.body.y);
        
+       //set caught to true if difference is below certain value
        if (diffX < 15 && diffY <15) {
            caught = true;
        }
@@ -33,8 +42,8 @@ define ('EventController', ['Phaser'], function(Phaser) {
    
    /** Function to check for and handling of player or opponents stepping on fields
     * 
-    * @param {PlayerChar} player
-    * @param {PlayerChar} opponent
+    * @param {Character} player
+    * @param {Character} opponent
     * @param {Fields} fields
     * @returns 1 if fields solved
     */
@@ -48,14 +57,11 @@ define ('EventController', ['Phaser'], function(Phaser) {
        var opponentX = opponent.sprite.body.x + 0.5* opponent.sprite.body.width;
        var opponentY = opponent.sprite.body.y + opponent.sprite.body.height;
        
-       if (lastField!= 0) console.log(lastField.pair);
        //Always highlight last field in green
        if (lastField != undefined) {
            lastField.frame = 1;
        }
        
-       // Create variable for activeField which is 0 to begin with
-
        //Check if stepped on field on put stepped on fields into an array (player and opponent)
        for (var i = 0; i<fields.list.length; i++) {
           if (
@@ -84,7 +90,7 @@ define ('EventController', ['Phaser'], function(Phaser) {
             }
           }
        
-       //Get the field that was stepped on later
+       //Get the field that was stepped on later by comparing steppedOn values
        if (steppedFields.length == 1) {
            activeField = steppedFields[0];
        } else if (steppedFields.length == 2) {
@@ -153,19 +159,23 @@ define ('EventController', ['Phaser'], function(Phaser) {
         return solved;
     }
     
-    function playFinalAudio (field) {
-         audioPlaying.onStop.add(function() {
-             if (!finalAudio.isPlaying) { 
-                 game.finalAudio = game.sound.play(game.finalAudio[Math.floor(activeField.number/2)]);   
-             }
-     }, 1);
+    /** Moves to Level End State when audio of last field stopped playing
+     * 
+     * @param {Fields.list[x]} field
+     */
+    function moveToNextLevel () {
+        audioPlaying.onStop.add(function() {
+            if (proceedLevel == true) {
+                game.state.start("LevelEnd");
+            }
+        }, 1);
     }
     
     //return public functions
     return {
-        resetLastField : resetLastField,
+        resetFields : resetFields,
         checkOpponentCatching: checkOpponentCatching, 
         checkFieldActivation: checkFieldActivation,
-        playFinalAudio: playFinalAudio
+        moveToNextLevel: moveToNextLevel
     }
 });
