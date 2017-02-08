@@ -4,7 +4,7 @@
  * @param {Phaser} Phaser
  * 
  */
-define("GameEnd", ['Phaser'],  function( Phaser ) { 
+define("GameEnd",  function( ) { 
    
 /** Main GameEnd function for Phaser States
  * 

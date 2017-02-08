@@ -3,7 +3,7 @@
  * @author Daniel Falkenstein - 797852
  */
 
-define ('EventController', ['Phaser'], function(Phaser) {
+define ('EventController', function() {
     var audioPlaying = 0;
     var finalAudio = 0;
     var activeField = 0;
@@ -117,7 +117,7 @@ define ('EventController', ['Phaser'], function(Phaser) {
        //copy activeField to lastField
        lastField = activeField;
        
-       //Show all non-active fields as inactive abd lastField as active
+       //Show all non-active fields as inactive and lastField as active
        for (var i=0; i<fields.list.length; i++) {
             if (!fields.list[i].solved && !fields.list[i] != lastField) {
                 fields.list[i].frame = 0;
@@ -131,7 +131,7 @@ define ('EventController', ['Phaser'], function(Phaser) {
        //Empty stepped fields array
        steppedFields = [];
        
-       //retun 1 if a pair was solved, else 0
+       //return 1 if a pair was solved, else 0
        return solved;
      
     }

@@ -6,7 +6,7 @@
  * @param {js} EventController}
  */
 
-define('GamePlay', ['Phaser', 'MoveController', 'EventController'], function (Phaser, MoveController, EventController) {
+define('GamePlay', ['MoveController', 'EventController'], function (MoveController, EventController) {
     //Holds the number of solved pairs at each level
     var solvedPairs = 0;
     

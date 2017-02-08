@@ -3,7 +3,7 @@
  * 
  * @returns {Fields}
  */
-define('Fields', ['Phaser'], function() {
+define('Fields', function() {
     
     /**Sets up Fields object that contains the single fields in an array
      * 

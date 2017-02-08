@@ -3,7 +3,7 @@
  * @author: Daniel Falkenstein - 797852
  * @param {type} Phaser
  */
-define("StartScreen", ['Phaser'],  function( Phaser ) { 
+define("StartScreen",  function( ) { 
    
 /** Main function for Phaser Game States
  * 

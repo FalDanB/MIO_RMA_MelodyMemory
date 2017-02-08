@@ -2,7 +2,7 @@
  * 
  * @author Daniel Falkenstein - 797852
  */
-define('MoveController', ['Phaser'], function() {
+define('MoveController', function() {
    
    /** Function to the move the main player
     *     * 

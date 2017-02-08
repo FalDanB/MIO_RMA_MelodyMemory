@@ -3,7 +3,7 @@
  * @param {Phaser} Phaser
  */
 
-define('Character', ['Phaser'], function(){
+define('Character', function(){
     
     /** Creates a Character with name (internal use), type (player or opponent) and Phaser game sprite
      * @param {type} Phaser Game

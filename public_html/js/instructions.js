@@ -4,7 +4,7 @@
  * @param {Phaser} Phaser
  * 
  */
-define("Instructions", ['Phaser'],  function( Phaser ) { 
+define("Instructions",  function( ) { 
 
 
 /** Main Instructions function for Phaser States

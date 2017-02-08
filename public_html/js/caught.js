@@ -3,7 +3,7 @@
  * @param {type} Phaser
  */
 
-define("Caught", ['Phaser'],  function( Phaser ) { 
+define("Caught",  function( ) { 
    
 Caught = function (game) {
     

@@ -12,7 +12,7 @@ var proceedLevel;
 
 
 
-define("GameBase", ['Phaser', 'GameSetup', 'GamePlay'],  function( Phaser, GameSetup, GamePlay) { 
+define("GameBase", ['GameSetup', 'GamePlay'],  function(GameSetup, GamePlay) { 
 
 /** Main GameBase function for Phaser States
  * 

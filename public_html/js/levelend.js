@@ -4,7 +4,7 @@
  * @param {type} Phaser
  * @returns {undefined}
  */
-define("LevelEnd", ['Phaser'],  function( Phaser ) { 
+define("LevelEnd", function( ) { 
 
 var finalAudioPlay;
 
