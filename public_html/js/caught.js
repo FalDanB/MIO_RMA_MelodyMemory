@@ -3,13 +3,13 @@
  * @param {type} Phaser
  */
 
-define("Caught",  function( ) { 
+define("caught",  function( ) { 
    
-Caught = function (game) {
+caught = function (game) {
     
 }
 
-Caught.prototype =  {
+caught.prototype =  {
     
     /** Create the Screen shown when caught by opponent
      */
@@ -26,7 +26,7 @@ Caught.prototype =  {
     restartLevel: function () {
         console.log("Caught screen: restart level button clicked");
         console.log(">>> switching to Game Base State");
-        this.game.state.start('GameBase');
+        this.game.state.start('gamebase');
     },
     
 }

@@ -4,7 +4,7 @@
  * @param {Phaser} Phaser
  * 
  */
-define("Instructions",  function( ) { 
+define("instructions",  function( ) { 
 
 
 /** Main Instructions function for Phaser States
@@ -12,10 +12,10 @@ define("Instructions",  function( ) {
  * @param {Phaser Game} game
  * 
  */
-Instructions = function (game) {
+instructions = function (game) {
 }
 
-Instructions.prototype =  {
+instructions.prototype =  {
    
     /** Sets up the instruction screen with background, sprites and buttons
      * 
@@ -25,6 +25,7 @@ Instructions.prototype =  {
         
         //Set background
         instructionsScreen = game.add.sprite(0,0,"instructions");
+        
         
         //Set buttons
         backutton = this.game.add.button(160,360,"backButton",this.backToMainScreen,this);
@@ -49,11 +50,10 @@ Instructions.prototype =  {
         console.log("Instruction: play button button clicked");
         game.level = 1;
         console.log("...set game level to 1");
-        playButton.destroy();
-        startScreen.destroy();
+        game.sound.stopAll();
         console.log("...removed start screen and play button");
         console.log(">>> switching to Main Game State");
-        this.game.state.start('GameBase');
+        this.game.state.start('gamebase');
     },
     
     
@@ -66,7 +66,7 @@ Instructions.prototype =  {
         game.level = 1;
         console.log("...set game level to 1");
         console.log(">>> switching to Game Base State");
-        this.game.state.start('StartScreen');
+        this.game.state.start('startscreen');
 
     } 
 }

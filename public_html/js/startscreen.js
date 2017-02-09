@@ -3,23 +3,26 @@
  * @author: Daniel Falkenstein - 797852
  * @param {type} Phaser
  */
-define("StartScreen",  function( ) { 
+define("startscreen",  function( ) { 
    
 /** Main function for Phaser Game States
  * 
  * @param {Phaser Game} game
  */
-StartScreen = function (game) {
+startscreen = function (game) {
     var startScreen, playButton;
 }
 
-StartScreen.prototype =  {
+startscreen.prototype =  {
     
     /**Sets upt the background image, buttons and animated characters
      * 
      */
     create: function () {
         console.log("Start Screen State: Create");
+        
+        //Play Background Music
+        game.sound.play('tchaikovsky');
         
         //Set Background Screen
         startScreen = game.add.sprite(0,0,"startScreen");
@@ -47,10 +50,11 @@ StartScreen.prototype =  {
      */
     startGame: function () {
         console.log("Start Screen State: play button or level 1 button clicked");
+        game.sound.stopAll();
         game.level = 1;
         console.log("...set game level to 1");
         console.log(">>> switching to Game Base State");
-        this.game.state.start('GameBase');
+        this.game.state.start('gamebase');
     },
     
     /** Function to start level 2 if button clicked
@@ -58,10 +62,11 @@ StartScreen.prototype =  {
      */
     startLevel2: function () {
         console.log("Start Screen State: level 2 button clicked");
+        game.sound.stopAll();
         game.level = 2;
         console.log("...set game level to 2");
         console.log(">>> switching to Game Base State");
-        this.game.state.start('GameBase');
+        this.game.state.start('gamebase');
     },
     
     
@@ -70,10 +75,11 @@ StartScreen.prototype =  {
      */
     startLevel3: function () {
         console.log("Start Screen State: level 3 button clicked");
+        game.sound.stopAll();
         game.level = 3;
         console.log("...set game level to 3");
         console.log(">>> switching to Game Base State");
-        this.game.state.start('GameBase');
+        this.game.state.start('gamebase');
     },
     
     
@@ -82,7 +88,7 @@ StartScreen.prototype =  {
      */
     showInstructions: function () {
         console.log("Start Screen State: instructions button clicked");
-        this.game.state.start('Instructions');
+        this.game.state.start('instructions');
 
     } 
 }

@@ -6,7 +6,7 @@
  * @param {js} EventController}
  */
 
-define('GamePlay', ['MoveController', 'EventController'], function (MoveController, EventController) {
+define('gameplay', ['movecontroller', 'eventcontroller'], function (MoveController, EventController) {
     //Holds the number of solved pairs at each level
     var solvedPairs = 0;
     
@@ -31,7 +31,7 @@ define('GamePlay', ['MoveController', 'EventController'], function (MoveControll
         
         //Check if opponent caught player
         if (EventController.checkOpponentCatching(levelData['player'], levelData['opponent'])) {
-            game.state.start("Caught");
+            game.state.start("caught");
         }
         
         //Check For Field Activation and add to solved pairs tally if solved

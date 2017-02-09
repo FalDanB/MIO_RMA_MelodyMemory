@@ -3,7 +3,7 @@
  * @author Daniel Falkenstein - 797852
  */
 
-define ('EventController', function() {
+define ('eventcontroller', function() {
     var audioPlaying = 0;
     var finalAudio = 0;
     var activeField = 0;
@@ -166,7 +166,7 @@ define ('EventController', function() {
     function moveToNextLevel () {
         audioPlaying.onStop.add(function() {
             if (proceedLevel == true) {
-                game.state.start("LevelEnd");
+                game.state.start("levelend");
             }
         }, 1);
     }

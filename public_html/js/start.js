@@ -9,20 +9,22 @@ requirejs.config({
       baseUrl: "js",
 }); 
 
-require(['Phaser', 'Preload', 'StartScreen', 'Instructions', 'GameBase', 'LevelEnd', 'Caught'], function(Phaser){  
+require(['phaser', 'boot', 'preload', 'startscreen', 'instructions', 'gamebase', 'levelend', 'caught'], function(){  
     //Create the Game Object
     game = new Phaser.Game(600, 400, Phaser.AUTO, 'gameSpace', '');  
     
     //Add the possible game states to the game
-    game.state.add('Preload', Preload);
-    game.state.add('StartScreen', StartScreen);
-    game.state.add('Instructions', Instructions);
-    game.state.add('GameBase', GameBase);
-    game.state.add('LevelEnd', LevelEnd);
-    game.state.add('Caught', Caught);
+    game.state.add('boot', boot);
+    game.state.add('preload', preload);
+    game.state.add('startscreen', startscreen);
+    game.state.add('instructions', instructions);
+    game.state.add('gamebase', gamebase);
+    game.state.add('levelend', levelend);
+    game.state.add('caught', caught);
+   
     
     //Start the Preload State
-    game.state.start('Preload');
+    game.state.start('boot');
     
     
 });

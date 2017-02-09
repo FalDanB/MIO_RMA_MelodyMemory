@@ -5,7 +5,7 @@
  * @param {Fields} Fields
  * @param {Character} Character
  */
-define('GameSetup', ['Fields', 'Character'], function(Fields, Character) {
+define('gamesetup', ['fields', 'character'], function(Fields, Character) {
    
    /** Funtion to set up the level with background, characters and fields
     * Returns an array of JSON level setup data, player, opponent and fields

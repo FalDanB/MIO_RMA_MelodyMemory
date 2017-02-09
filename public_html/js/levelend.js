@@ -4,7 +4,7 @@
  * @param {type} Phaser
  * @returns {undefined}
  */
-define("LevelEnd", function( ) { 
+define("levelend", function( ) { 
 
 var finalAudioPlay;
 
@@ -12,11 +12,11 @@ var finalAudioPlay;
  * 
  * @param {Phaser Game} game
  */
-LevelEnd = function (game) {
+levelend = function (game) {
    
     }
 
-LevelEnd.prototype =  {
+levelend.prototype =  {
    
     /** Sets up interlevel or game end screen and buttons
      * 
@@ -51,7 +51,7 @@ LevelEnd.prototype =  {
         finalAudioPlay.stop();
         console.log("...stopped all sound");
         console.log(">>> switching to Game Base State");
-        this.game.state.start('GameBase');
+        this.game.state.start('gamebase');
     },
     
     /**Function to restart the game (GameBase state) if button clicked
@@ -63,7 +63,7 @@ LevelEnd.prototype =  {
         game.level = 1;
         console.log("...set game level to 1");
         console.log(">>> switching to Main Game State");
-        this.game.state.start('GameBase');
+        this.game.state.start('gamebase');
     },
        
 }
