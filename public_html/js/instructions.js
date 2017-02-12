@@ -51,7 +51,6 @@ instructions.prototype =  {
         game.level = 1;
         console.log("...set game level to 1");
         game.sound.stopAll();
-        console.log("...removed start screen and play button");
         console.log(">>> switching to Main Game State");
         this.game.state.start('gamebase');
     },
